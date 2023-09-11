@@ -1,0 +1,22 @@
+package com.keduit.sample;
+
+import org.springframework.stereotype.Component;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+
+@Component
+@ToString
+@Getter
+@RequiredArgsConstructor
+public class SampleHotel {
+	
+	//RequiredArgsConstructor 초기화 되지 않은 final필드.
+	private final Chef chef;
+
+	
+//	혹은 @nonNull
+//	private final Chef chef;
+	
+}
