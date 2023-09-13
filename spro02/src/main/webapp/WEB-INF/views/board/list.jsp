@@ -19,7 +19,7 @@
                             Board List Page
                             
                         	<button id="regBtn" type="button"
-                        				class="btn btn-xs pull-right">
+                        				class="btn btn-primary btn-xs pull-right">
                         	게시글 등록</button>
                         	
                         </div>
@@ -36,10 +36,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                               
                                 <c:forEach items="${list }" var="board">
                                 	<tr>
                                         <td><c:out value ="${ board.bno}"></c:out></td>
-                                        <td><c:out value ="${ board.title}"></c:out></td>
+                                        <td><a href="/board/get?bno=${board.bno}"><c:out value ="${ board.title}"></c:out></a></td>
                                         <td><c:out value ="${ board.writer}"></c:out></td>
                                         <td><fmt:formatDate pattern="MM-dd hh:mm:ss"  value="${board.regdate}" /> </td>
                                         <td><fmt:formatDate pattern="MM-dd hh:mm:ss"  value="${board.updatedate}" /> </td>
@@ -61,8 +62,7 @@
                                         	처리가 완료되었습니다.
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
                                         </div>
                                     </div>
                                     <!-- /.modal-content -->
@@ -81,8 +81,12 @@
 			
 			checkModal(result);
 			
+			console.log(history);
+			history.replaceState({},null,null);
+			
+			
 			function checkModal(result){
-				if(result === ''){return;}
+				if(result === '' || history.state) {return;}
 				if(parseInt(result) > 0) {
 					$(".modal-body").html("게시글 "+ parseInt(result)+ "번이 등록 되었습니다.")
 				}
@@ -95,5 +99,5 @@
 					)
 </script>	 
 
- <%@include file="../includes/footer.jsp" %>
+<%@include file="../includes/footer.jsp" %>
      

@@ -43,6 +43,18 @@ public class BoardControllerTests {
 				.getModelAndView()
 				.getModelMap());
 	}
+	@Test
+	public void testListPaging() throws Exception {
+		
+		log.info(
+				// 주소표시줄에서의 호출된 효과
+				mockMvc.perform(MockMvcRequestBuilders.get("/board/list")
+						.param("pageNum", "4")
+						.param("amount", "10"))
+				.andReturn()
+				.getModelAndView()
+				.getModelMap());
+	}
 
 	@Test
 	public void testRegister() throws Exception {
@@ -73,7 +85,7 @@ public class BoardControllerTests {
 				.param("bno","1")
 				.param("title", "아낀다")
 				.param("content","아낀다")
-				.param("writer","디오"))
+				.param("writer","버논"))
 				.andReturn().getModelAndView().getViewName();
 		log.info(resultPage);
 	}

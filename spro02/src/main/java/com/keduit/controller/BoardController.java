@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.keduit.domain.BoardVO;
+import com.keduit.domain.Criteria;
 import com.keduit.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,12 +25,20 @@ public class BoardController {
 	// Controller는 Service 호출해서 사용하면 됨, Service(주입)가 꼭 필요함!!	
 	private final BoardService service;
 	
+//	@GetMapping("/list")
+//	//Model타입의 model 을 받아 옴(MVC중에 M!)
+//	public void list(Model model) {
+//		log.info("list......");
+//		//"list"로 가지고 오는데 위에 호출했던 service의 gerList 함수를 가지고 온다.
+//		model.addAttribute("list", service.getList());
+//	}
+	
 	@GetMapping("/list")
 	//Model타입의 model 을 받아 옴(MVC중에 M!)
-	public void list(Model model) {
-		log.info("list......");
+	public void list(Criteria cri, Model model) {
+		log.info("list......"+ cri);
 		//"list"로 가지고 오는데 위에 호출했던 service의 gerList 함수를 가지고 온다.
-		model.addAttribute("list", service.getList());
+		model.addAttribute("list", service.getList(cri));
 	}
 	
 	
@@ -56,16 +65,16 @@ public class BoardController {
 	
 	
 	//  /board/get 으로 들어왔을 때.
-	@GetMapping("/get")
+	@GetMapping({"/get", "/modify"})
 	public void get(@RequestParam("bno") Long bno, Model model) {
-		log.info(".../get ...");
+		log.info(".../get ... or /modify");
 		//service에서 읽어온 bno를 board라 읽고 
 		model.addAttribute("board",  service.get(bno));
 	}
 	
 	@PostMapping("/modify")
 	public String modify(BoardVO board, RedirectAttributes rttr) {
-		log.info("..............modify : ");
+		log.info("..............modify : " + board);
 		//modify는 boolean타입으로 true false를 반환함.
 		if(service.modify(board)) {
 			rttr.addFlashAttribute("result", "success");
