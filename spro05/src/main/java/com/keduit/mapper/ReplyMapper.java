@@ -20,5 +20,7 @@ public interface ReplyMapper {
 	public List<replyVO> getListWithPaging(
 							@Param("cri")Criteria cri, 
 							@Param("bno")Long bno);
+
+	public Object getCountByBno(Long bno);
 	
 }

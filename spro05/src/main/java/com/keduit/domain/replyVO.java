@@ -12,7 +12,7 @@ public class replyVO {
 	
 	private String reply;
 	private String replyer;
-	private Date replyDte;
+	private Date replyDate;
 	private Date updateDate;
 	
 	

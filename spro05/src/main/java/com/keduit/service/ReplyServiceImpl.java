@@ -3,8 +3,10 @@ package com.keduit.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.keduit.domain.Criteria;
+import com.keduit.domain.ReplyPageDTO;
 import com.keduit.domain.replyVO;
 import com.keduit.mapper.ReplyMapper;
 
@@ -22,11 +24,15 @@ public class ReplyServiceImpl implements ReplyService{
 	//ReplyMapper를 뉴 !
 	private final ReplyMapper mapper;
 	
+	//무결성을 위해 트랜젝션을 넣어야 함.
+//	@Transactional
 	@Override
 	public int register(replyVO vo) {
 		int result = mapper.insert(vo);
 		log.info("register..................."+ vo);
+		//boardmapper.updateReplyCnt(vo.getBno(),1);
 		return result;
+		
 	}
 
 	@Override
@@ -42,18 +48,28 @@ public class ReplyServiceImpl implements ReplyService{
 		int result = mapper.update(vo);
 		return result;
 	}
-
+	
+	//무결성을 위해 트랜젝션을 넣어야 함.
+//	@Transactional
 	@Override
 	public int remove(long rno) {
 		log.info("remove..... ....");
 		int result = mapper.delete(rno);
+//		boardmapper.updateReplyCnt(vo.getBno(), -1);
 		return result;
 	}
 
 	@Override
 	public List<replyVO> getList(Criteria cri, Long bno) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("getList..... ....");
+		return mapper.getListWithPaging(cri, bno);
+	}
+
+	@Override
+	public ReplyPageDTO getListPage(Criteria cri, Long bno) {
+		log.info("------- getListPage -----" + cri + " and "+bno);
+		return new ReplyPageDTO(mapper.getCountByBno(bno),
+								mapper.getListWithPaging(cri, bno));
 	}
 
 }

@@ -36,9 +36,9 @@ public class ReplyServiceTest {
 	public void testRegister() {
 		replyVO reply = new replyVO();
 		reply.setBno(110L);
-		reply.setReply("선플 달기 운동 따뜻한 댓글을 남겨봅니다.");
-		reply.setReplyer("우웅이");
-		long rno = service.register(reply);
-		log.info("생성한 따뜻한 선플이 "+rno+"개가 달렸습니다 ^^");
+		reply.setReply("선플 달기 운동");
+		reply.setReplyer("웅웅");
+		long num = service.register(reply);
+		log.info("생성한 따뜻한 선플이 "+num+"개가 달렸습니다 ^^");
 	}
 }

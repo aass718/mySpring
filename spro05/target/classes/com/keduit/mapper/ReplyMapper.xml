@@ -29,5 +29,9 @@
 		where bno = #{bno}
 		order by rno asc
 	</select>
+	<select id="getCountByBno" resultType="int">
+		select count(rno) from reply where bno = #{bno}
+	</select>
+	
 
 </mapper>

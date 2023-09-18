@@ -3,11 +3,12 @@ package com.keduit.service;
 import java.util.List;
 
 import com.keduit.domain.Criteria;
+import com.keduit.domain.ReplyPageDTO;
 import com.keduit.domain.replyVO;
 
 public interface ReplyService {
 	
-	//list
+	//list 댓글 전체 조회
 	public List<replyVO> getList(Criteria cri, Long bno);
 	
 	//register 의 뜻은 기억장치, 저장하는 것. create?
@@ -22,6 +23,7 @@ public interface ReplyService {
 	//삭제 delete
 	public int remove(long rno);
 	
-	
+	//
+	public ReplyPageDTO getListPage(Criteria cri, Long bno);
 	
 }

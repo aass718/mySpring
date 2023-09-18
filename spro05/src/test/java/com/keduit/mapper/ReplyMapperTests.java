@@ -47,7 +47,7 @@ public class ReplyMapperTests {
 	
 	@Test
 	public void testRead() {
-		Long rno = 1L;
+		Long rno = 41L;
 		replyVO vo = mapper.read(rno);
 		log.info(vo);
 		
@@ -55,14 +55,14 @@ public class ReplyMapperTests {
 	
 	@Test
 	public void testDelete() {
-		Long rno = 1L;
+		Long rno = 41L;
 		mapper.delete(rno);
 		log.info(rno +"는 삭제 되었습니다.");
 	}
 	
 	@Test
 	public void testUpdate() {
-		Long rno = 2L;
+		Long rno = 38L;
 		replyVO vo = mapper.read(rno);
 		vo.setReply("댓글 수정");
 		int count = mapper.update(vo);

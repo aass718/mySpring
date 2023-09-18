@@ -56,4 +56,60 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            
+
+<script type="text/javascript" src="/resources/js/reply.js">
+</script>            
+
+<script type="text/javascript">
+$(document).ready(function(){
+	console.log("=============================");
+	console.log("========== JS TEST ==========");
+	const bnoValue = '<c:out value="${board.bno}"/>';
+	
+/* 	replyService.add(
+		{reply: 'JS TEST',
+		 replyer: 'tester',
+		 bno: bnoValue},
+		 function(result){
+			 alert("TESULT : "+result)
+		 }
+	);
+	
+	replyService.getList({bno:bnoValue, page:1},
+		function(list){
+		for(let i=0, len=list.length|| 0; i<len; i++){
+			console.log(list[i])
+		}
+	});
+	 */
+	
+	
+	/* 
+	replyService.remove(73, 
+		function(count){
+		console.log("..remove count : ", count);
+		if(count === "success"){
+			alert("removed.........");
+		}}, function(err){
+			alert("ERROR!!!!");
+		});
+	
+	replyService.update({
+		rno: 47,
+		bno: bnoValue,
+		reply:"update from get.jsp"
+	},function(result){
+		alert("수정 완료!");
+	});  */
+	
+	replyService.get(61, function(data){
+		console.log("...... get data : ", data);
+	});
+	
+	
+	console.log(replyService);
+	
+})
+</script>
 <%@include file="../includes/footer.jsp"%>
