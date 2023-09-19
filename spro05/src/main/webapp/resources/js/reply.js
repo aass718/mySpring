@@ -36,7 +36,11 @@
 
         $.getJSON("/reply/pages/"+bno+"/" +page + ".json",
                   function(data){
-                    if(callback){callback(data);}
+                    if(callback){
+                      // callback(data);
+                    callback(data.replyCnt, data.list)
+                    
+                    }
                   }
                 ).fail(function(xhr, status, err){
                         if(error){
@@ -120,13 +124,53 @@
     //     })
     // }
 
+    function displayTime(timeValue){
+      //오늘 날짜를 가지고 옴.
+      const today = new Date();
+      const gap = today.getTime() - timeValue;
+      const dateObj = new Date(timeValue);
+      let str = "";
+      if(gap < (1000 * 60 * 60 * 24)){
+        //시간
+        // const hh = dateObj.getHours();
+        // const hh = dateObj.getHours().toString().padStart(2, "0"); 
+        //이렇게 할 경우 return을 할 때 (hh > 9 ? "":"0")  조건문을 사용하지 않아도 됨.
+        //분
+        // const mi = dateObj.getMinutes();
+        //초
+        // const ss =dateObj.getSeconds();
+
+        // return [(hh > 9 ? "":"0") + hh , ":", 
+        //         (mi > 9 ? "" : "0") + mi, ":",
+        //         (ss > 9 ? "" : "0") + ss].join('');
+
+        const hh = dateObj.getHours().toString().padStart(2, "0"); 
+        const mi = dateObj.getMinutes().toString().padStart(2, "0"); 
+        const ss = dateObj.getSeconds().toString().padStart(2, "0"); 
+        return hh+ ":"+mi +":"+ss;
+
+      }else{
+        const yy = dateObj.getFullYear();
+        const mm = dateObj.getMonth();
+        const dd = dateObj.getDate();
+
+        return [yy, "/", 
+                (mm > 9 ? "" : "0") + mm,"/",
+                (dd > 9 ? "" : "0") + dd].join('');
+      }
+    }
+
+
+
+
     //리턴 꼭 하기~
     return {
         add:add,
         getList:getList,
         remove:remove,
         update:update,
-        get:get
+        get:get,
+        displayTime:displayTime 
     };
 
  }

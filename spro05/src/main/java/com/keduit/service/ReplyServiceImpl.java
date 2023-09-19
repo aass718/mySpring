@@ -68,6 +68,7 @@ public class ReplyServiceImpl implements ReplyService{
 	@Override
 	public ReplyPageDTO getListPage(Criteria cri, Long bno) {
 		log.info("------- getListPage -----" + cri + " and "+bno);
+			//bno가 가지고 있는 bno 갯수 읽음. 
 		return new ReplyPageDTO(mapper.getCountByBno(bno),
 								mapper.getListWithPaging(cri, bno));
 	}

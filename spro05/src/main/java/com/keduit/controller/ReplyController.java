@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.keduit.domain.Criteria;
+import com.keduit.domain.ReplyPageDTO;
 import com.keduit.domain.replyVO;
 import com.keduit.service.ReplyService;
 
@@ -52,13 +53,16 @@ public class ReplyController {
 	@GetMapping(value="/pages/{bno}/{page}",
 						produces = {MediaType.APPLICATION_JSON_VALUE,
 									MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<replyVO>> getList(
+	public ResponseEntity<ReplyPageDTO> getList(
 			@PathVariable("bno") Long bno,
 			@PathVariable("page") int page)
+	
 	{  log.info("...................getList....... bno: "+ bno +"  page: " + page);
+	
 		Criteria cri = new Criteria(page, 10);
 		log.info("...................cri ......... : "+cri);
-		return new ResponseEntity<>(service.getList(cri, bno),HttpStatus.OK);	
+		
+		return new ResponseEntity<>(service.getListPage(cri, bno),HttpStatus.OK);	
 	}
 	
 	@DeleteMapping(value="/{rno}", 

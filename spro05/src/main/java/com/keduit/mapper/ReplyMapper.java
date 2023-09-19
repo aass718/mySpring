@@ -21,6 +21,7 @@ public interface ReplyMapper {
 							@Param("cri")Criteria cri, 
 							@Param("bno")Long bno);
 
-	public Object getCountByBno(Long bno);
+	//bno count 이기에 int타입 꼬옥 확인 하고 타입을 적자.
+	public int getCountByBno(Long bno);
 	
 }

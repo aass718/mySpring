@@ -3,6 +3,8 @@ package com.keduit.mapper;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import javax.servlet.annotation.WebServlet;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,7 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml",
-							"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
 public class ReplyMapperTests {
 	
@@ -72,6 +73,13 @@ public class ReplyMapperTests {
 	@Test
 	public void testList() {
 		Criteria cri = new Criteria();
+		List<replyVO> replies = mapper.getListWithPaging(cri, bnoArr[0]);
+		replies.forEach(reply -> log.info(reply));
+	}
+	
+	@Test
+	public void testList2() {
+		Criteria cri = new Criteria(1,10);
 		List<replyVO> replies = mapper.getListWithPaging(cri, bnoArr[0]);
 		replies.forEach(reply -> log.info(reply));
 	}
