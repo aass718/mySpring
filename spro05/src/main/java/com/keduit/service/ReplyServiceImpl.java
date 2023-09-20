@@ -2,12 +2,14 @@ package com.keduit.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.keduit.domain.Criteria;
 import com.keduit.domain.ReplyPageDTO;
 import com.keduit.domain.replyVO;
+import com.keduit.mapper.BoardMapper;
 import com.keduit.mapper.ReplyMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -24,13 +26,16 @@ public class ReplyServiceImpl implements ReplyService{
 	//ReplyMapper를 뉴 !
 	private final ReplyMapper mapper;
 	
+	@Autowired
+	private BoardMapper boardmapper;
+	
 	//무결성을 위해 트랜젝션을 넣어야 함.
-//	@Transactional
+	@Transactional
 	@Override
 	public int register(replyVO vo) {
 		int result = mapper.insert(vo);
 		log.info("register..................."+ vo);
-		//boardmapper.updateReplyCnt(vo.getBno(),1);
+		boardmapper.updateReplyCnt(vo.getBno(),1);
 		return result;
 		
 	}
@@ -54,9 +59,10 @@ public class ReplyServiceImpl implements ReplyService{
 	@Override
 	public int remove(long rno) {
 		log.info("remove..... ....");
-		int result = mapper.delete(rno);
-//		boardmapper.updateReplyCnt(vo.getBno(), -1);
-		return result;
+//		int result = mapper.delete(rno);
+		replyVO vo = mapper.read(rno);
+		boardmapper.updateReplyCnt(vo.getBno(), -1);
+		return mapper.delete(rno);
 	}
 
 	@Override

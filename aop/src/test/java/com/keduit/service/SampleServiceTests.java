@@ -16,6 +16,8 @@ public class SampleServiceTests {
 	@Autowired
 	private SampleService service;
 	
+	@Autowired
+	private SampleTxService txservice;
 	
 	@Test
 	public void testClass() {
@@ -32,6 +34,18 @@ public class SampleServiceTests {
 	public void testException() throws Exception{
 		log.info(service.doAdd("123", "abc"));
 	}
+	/*=================================================================================*/
 	
+	@Test
+	public void testLong() {
+		String str = "Lorem ipsum dolor sit amet, consectetur adipiscing "
+		                + "nostrud exercitation ullamco laboris nisi ut aliquip "
+		                + "elit, sed do eiusmod tempor incididunt ut labore et "
+		                + "dolore magna aliqua. Ut enim ad minim veniam, quis "
+		                + "nostrud exercitation ullamco laboris nisi ut aliquip "
+		                + "ex ea commodo consequat.";
+		log.info(str.getBytes().length);
+		txservice.addData(str);
+	}
 	
 }

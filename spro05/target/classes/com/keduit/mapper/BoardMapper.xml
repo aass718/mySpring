@@ -14,9 +14,9 @@
 		resultType="com.keduit.domain.BoardVO">
 		
 		<![CDATA[
-			SELECT bno, title, writer, content, regdate, updatedate from
+			SELECT bno, title, writer, content, regdate, updatedate, replycnt from
 			(select /*+ index_desc(board pk_board*/
-			rownum rn, bno, title, writer,  content, regdate, updatedate
+			rownum rn, bno, title, writer,  content, regdate, updatedate, replycnt
 			from board
 			where rownum <= #{pageNum} * #{amount} order by bno)
 			where rn >(#{pageNum} -1) * #{amount}
@@ -53,6 +53,12 @@
 		updatedate = sysdate
 		where bno = #{bno}
 	</update>
+	
+	<update id = "updateReplyCnt">
+		update board set
+		replyCnt = replycnt + #{amount} where bno=#{bno}
+	</update>
+
 
 </mapper>
 

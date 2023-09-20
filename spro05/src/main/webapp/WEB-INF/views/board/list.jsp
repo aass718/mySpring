@@ -40,7 +40,9 @@
                                 <c:forEach items="${list }" var="board">
                                 	<tr>
                                         <td><c:out value ="${ board.bno}"></c:out></td>
-                                        <td><a href="/board/get?bno=${board.bno}"><c:out value ="${ board.title}"></c:out></a></td>
+                                        <td><a href="/board/get?bno=${board.bno}"><c:out value ="${ board.title}"></c:out>
+                                        	 <i class="fa fa-comments fa-fw"></i><b>[${ board.replyCnt }]</b>
+                                        	</a></td>
                                         <td><c:out value ="${ board.writer}"></c:out></td>
                                         <td><fmt:formatDate pattern="MM-dd hh:mm:ss"  value="${board.regdate}" /> </td>
                                         <td><fmt:formatDate pattern="MM-dd hh:mm:ss"  value="${board.updatedate}" /> </td>
