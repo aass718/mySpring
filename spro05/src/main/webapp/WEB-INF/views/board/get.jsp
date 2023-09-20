@@ -190,7 +190,7 @@
 								next = true;
 							}
 
-							let str = "<ul class='pagination pull-right'>";
+							let str = "<div class='container text-center'><ul class='pagination pull-right'>";
 
 							if (prev) {
 								str += "<li class=:'page-item'><a class='page-link' href='"
@@ -208,11 +208,23 @@
 										+ (endNum + 1) + "'>다음</a></li>";
 							}
 
-							str += "</ul>";
+							str += "</ul></div>";
 							console.log(str);
 							replyPageFooter.html(str);
 
 						}
+						
+						// replyPageFooter를 클릭할 때 li a에 함수 전달. 
+						//댓글 reply 테
+						replyPageFooter.on("click","li a",function(e){
+							e.preventDefault();
+							console.log(".................PageNum Click");
+							const targetPage = $(this).attr("href");
+							console.log("targetpage............."+targetPage);
+							
+							pageNum = targetPage;
+							showList(pageNum);
+						})
 
 						//댓글 모달 처리
 						const modal = $("#myModal");
